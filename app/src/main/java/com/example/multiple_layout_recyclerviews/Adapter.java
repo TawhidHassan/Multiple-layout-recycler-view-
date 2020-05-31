@@ -3,6 +3,8 @@ package com.example.multiple_layout_recyclerviews;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import static com.example.multiple_layout_recyclerviews.ModelClass.USERINFO_LAYO
 public class Adapter extends RecyclerView.Adapter {
 
     List<ModelClass>modelClassList;
+    private int lastPosition=-1;
 
     public Adapter(List<ModelClass> modelClassList) {
         this.modelClassList = modelClassList;
@@ -79,6 +82,12 @@ public class Adapter extends RecyclerView.Adapter {
                 break;
             default:
                 return;
+        }
+        if (lastPosition<position)
+        {
+            Animation animation= AnimationUtils.loadAnimation(holder.itemView.getContext(),android.R.anim.fade_in);
+            holder.itemView.setAnimation(animation);
+            lastPosition=position;
         }
     }
 
